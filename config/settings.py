@@ -83,8 +83,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # DATABASE_URL is provided automatically by Railway's PostgreSQL plugin.
 # Falls back to local sqlite when not set, so local dev needs no Postgres install.
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
+    'default': dj_database_url.parse(
+        config('DATABASE_URL', default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
+        
         conn_max_age=600,
     )
 }
